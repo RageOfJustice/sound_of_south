@@ -1,17 +1,39 @@
+// @flow
 import React from 'react'
 import { createSwitchNavigator } from 'react-navigation'
-import { LoginScreen } from '../screens'
+import { connect } from 'react-redux'
+import { setNavigation } from '../actions'
+import { LoginContainer } from '../containers'
 import MainNavigator from './Main'
 
-const AppNavigator = createSwitchNavigator({
-  Login: LoginScreen,
-  Main: MainNavigator,
-})
+const AppSwitchNavigator = createSwitchNavigator(
+  {
+    Login: LoginContainer,
+    Main: MainNavigator,
+  },
+  {
+    initialRouteName: 'Login',
+  },
+)
 
-class App extends React.Component {
+type Props = {
+  setNavigation: (nav: object) => void,
+}
+class App extends React.Component<Props> {
+  componentDidMount() {
+    this.props.setNavigation(this.navigator)
+  }
+
   render() {
-    return <AppNavigator />
+    return <AppSwitchNavigator ref={ref => (this.navigator = ref)} />
   }
 }
 
-export default App
+const mapDispatchToProps = {
+  setNavigation,
+}
+
+export default connect(
+  undefined,
+  mapDispatchToProps,
+)(App)
