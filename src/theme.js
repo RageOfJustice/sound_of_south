@@ -20,7 +20,8 @@ export default {
     coolGray50: 'rgba(227,233,236,.5)',
   },
   size: {
-    s: 12,
+    xs: 12,
+    s: 14,
     m: 16,
     l: 20,
   },

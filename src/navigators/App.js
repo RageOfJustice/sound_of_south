@@ -1,9 +1,11 @@
 import React from 'react'
 import { createSwitchNavigator } from 'react-navigation'
+import { LoginScreen } from '../screens'
+import MainNavigator from './Main'
 
 const AppNavigator = createSwitchNavigator({
-  Login: null,
-  Main: null,
+  Login: LoginScreen,
+  Main: MainNavigator,
 })
 
 class App extends React.Component {
