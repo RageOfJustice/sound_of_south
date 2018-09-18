@@ -1,0 +1,51 @@
+{
+  "name": "react_native_template",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
+    "android": "node node_modules/react-native/local-cli/cli.js run-android",
+    "test": "jest"
+  },
+  "dependencies": {
+    "ramda": "^0.25.0",
+    "react": "16.5.0",
+    "react-native": "0.57.0",
+    "react-navigation": "^2.14.2",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-actions": "^2.6.1",
+    "redux-form": "^7.4.2",
+    "redux-saga": "^0.16.0",
+    "styled-components": "^3.4.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^9.0.0",
+    "babel-jest": "23.6.0",
+    "eslint": "^5.6.0",
+    "eslint-plugin-flowtype": "^2.50.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "flow-bin": "^0.81.0",
+    "husky": "^0.14.3",
+    "jest": "23.6.0",
+    "lint-staged": "^7.2.2",
+    "metro-react-native-babel-preset": "0.45.3",
+    "prettier": "^1.14.2",
+    "react-test-renderer": "16.5.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ]
+  }
+}

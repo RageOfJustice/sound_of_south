@@ -1,0 +1,24 @@
+{
+  "parser": "babel-eslint",
+  "plugins": ["jsx-a11y", "flowtype", "import", "react"],
+  "extends": [
+    "plugin:jsx-a11y/recommended",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:flowtype/recommended"
+  ],
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": false
+    }
+  },
+  "rules": {
+    "import/no-unresolved": "error",
+    "import/named": "error",
+    "import/namespace": "error",
+    "import/no-cycle": "error",
+    "import/no-duplicates": "error",
+    "import/first": "warn",
+    "no-console": "error"
+  }
+}
