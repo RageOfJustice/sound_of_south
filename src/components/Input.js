@@ -5,8 +5,8 @@ const Input = styled.TextInput.attrs({
   underlineColorAndroid: 'transparent',
 })`
   padding: 5px 10px;
-  border-width: 1px;
-  flex: 1;
+  background-color: ${({ theme }) => theme.color.coolGray};
+  font-size: ${({ theme }) => theme.size.m};
 `
 
 export default Input
