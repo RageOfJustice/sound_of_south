@@ -6,7 +6,9 @@ import { LoginFormContainer as LoginForm } from '../containers'
 
 const Container = styled.View`
   flex: 1;
+  padding: 20px;
   justify-content: center;
+  background-color: ${({ theme }) => theme.color.black100};
 `
 
 type Props = {
@@ -16,7 +18,7 @@ class Login extends React.Component<Props> {
   render() {
     return (
       <Container>
-        <LoginForm />
+        <LoginForm logoText="Голос Юга" />
       </Container>
     )
   }
