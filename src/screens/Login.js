@@ -8,7 +8,7 @@ const Container = styled.View`
   flex: 1;
   padding: 20px;
   justify-content: center;
-  background-color: ${({ theme }) => theme.color.black100};
+  background-color: ${({ theme }) => theme.color.coolGray};
 `
 
 type Props = {
