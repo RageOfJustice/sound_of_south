@@ -2,6 +2,7 @@
 import React from 'react'
 import { Platform } from 'react-native'
 import { Field } from 'redux-form'
+import type { FormProps } from 'redux-form'
 import { Input, Button, Text } from 'react-native-elements'
 import styled from 'styled-components'
 import { HIT_SLOP_10 } from '../constants'
@@ -20,6 +21,10 @@ const SubmitButton = styled(Button).attrs({
     backgroundColor: '#fff',
     borderWidth: 0,
     borderRadius: 25,
+  },
+  loadingProps: ({ theme }) => ({ size: 'small', color: theme.color.orange }),
+  loadingStyle: {
+    padding: 10,
   },
   titleStyle: ({ theme }) => ({
     color: theme.color.orange,
@@ -57,11 +62,19 @@ const FormLabel = styled(Text)`
 type Props = {
   theme: object,
   logoText: string,
-}
+  isFetching: boolean,
+  requestAuth: Function,
+} & FormProps
 
 class LoginForm extends React.PureComponent<Props> {
   render() {
-    const { theme, logoText } = this.props
+    const {
+      theme,
+      logoText,
+      handleSubmit,
+      requestAuth,
+      isFetching,
+    } = this.props
     return (
       <Container>
         <LogoText>{logoText}</LogoText>
@@ -71,7 +84,10 @@ class LoginForm extends React.PureComponent<Props> {
           theme={theme}
           component={this._renderPasswordInput}
         />
-        <SubmitButton />
+        <SubmitButton
+          loading={isFetching}
+          onPress={handleSubmit(requestAuth)}
+        />
       </Container>
     )
   }
