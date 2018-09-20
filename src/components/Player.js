@@ -39,7 +39,7 @@ class Player extends React.PureComponent<Props> {
           playInBackground={true}
           playWhenInactive={true}
           ignoreSilentSwitch={'ignore'}
-          onBuffer={this._onBuffer}
+          // onBuffer={this._onBuffer}
           onLoadStart={this._onLoadStart}
           onProgress={this._onProgress}
           onEnd={this._onEnd}
@@ -53,10 +53,10 @@ class Player extends React.PureComponent<Props> {
     this.isFetching = true
   }
 
-  _onBuffer = ({ isBuffering }) => {
-    this.isFetching = isBuffering
-    this.props.setFetchingTrack(isBuffering)
-  }
+  // _onBuffer = ({ isBuffering }) => {
+  //   this.isFetching = isBuffering
+  //   this.props.setFetchingTrack(isBuffering)
+  // }
 
   _onProgress = () => {
     if (this.isFetching) {

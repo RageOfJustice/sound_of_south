@@ -24,10 +24,10 @@ export const getPodcasts = () =>
       },
       {
         podcastId: '2',
-        title: '2 minutes',
+        title: 'money talks',
         url:
-          'https://s55myt.storage.yandex.net/get-mp3/01e98ae33d426d2f350422296b9e9d71/0005764e0aee959b/music/25/7/data-0.2:21788133749:8684981?track-id=303979',
-        tags: ['#bestbands', '#iron'],
+          'https://psv4.vkuseraudio.net/c4661/u2963066/audios/ba318e670099.mp3?extra=Pt2qBBkomt_pWW9QsN60gy_1maMoRrPiV_kU14F7lHmTmQUV0mCPagAN_pLv4UyNELgFQPIJ5gwzNxKuGQ0mIaALU0Ouya4L4AQJIMEoszn-dHZULhbbsIsQ5ZQBCVdoR90Nt3jgF39yI6V3',
+        tags: ['#bestbands', '#ac', '#classicmetal'],
       },
     ]),
   )

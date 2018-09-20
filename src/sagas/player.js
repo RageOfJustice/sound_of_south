@@ -10,6 +10,7 @@ import {
   pauseTrack,
   receivePodcasts,
   requestPlayTrack,
+  requestPauseTrack,
 } from '../actions'
 import { getPlaylist, getNextTrack, getPreviousTrack } from '../selectors'
 import { getPodcasts } from '../managers'
@@ -51,6 +52,7 @@ const requestPodcastsWatcher = function*() {
 }
 
 const changeTrackWorker = function*({ payload: nextTrack }) {
+  yield put(requestPauseTrack())
   const selector = nextTrack ? getNextTrack : getPreviousTrack
   const { podcastId } = yield select(selector)
   yield put(requestPlayTrack(podcastId))
