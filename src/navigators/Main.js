@@ -1,10 +1,10 @@
 import { createStackNavigator } from 'react-navigation'
-import { PodcastsScreen } from '../screens'
+import { PodcastsContainer } from '../containers'
 
 const Main = createStackNavigator(
   {
     Podcasts: {
-      screen: PodcastsScreen,
+      screen: PodcastsContainer,
       navigationOptions: { title: 'Голос Юга' },
     },
   },

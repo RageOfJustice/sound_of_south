@@ -1,39 +1,40 @@
 // @flow
 import React from 'react'
-import { FlatList, View } from 'react-native'
+import { FlatList } from 'react-native'
 import {
   PlayerContainer as Player,
   TrackItemContainer as TrackItem,
 } from '../containers'
+import { Preloader } from '../components'
 
-const tracks = [
-  {
-    title: 'Murmaider',
-    tags: ['#tag', '#tag1', '#tag2'],
-    url:
-      'https://cs1-48v4.vkuseraudio.net/p8/39e4d1cc83bafc.mp3?extra=V2h8wVgWKReYcPLR3gIUjxdGflD5MMnP3hHjOSJi-s18VmYIPXc__0gRVwwF-vdXTZEUfmYmSJFvS2jDr4NaiUc6UnMWYCHnr56NMqhLsIMg5MHDZqO4j_gG09-SOTpZUqiJp7i4yiwlbTs',
-  },
-  {
-    title: '2 minutes',
-    url:
-      'https://s55myt.storage.yandex.net/get-mp3/01e98ae33d426d2f350422296b9e9d71/0005764e0aee959b/music/25/7/data-0.2:21788133749:8684981?track-id=303979&play=false',
-    tags: ['#bestbands', '#iron'],
-  },
-]
+type Props = {
+  podcasts: object[],
+  isFetching: boolean,
+  requestPodcasts: Function,
+}
 
-class Podcasts extends React.Component {
+class Podcasts extends React.Component<Props> {
   _keyExtractor = (_, index) => `${index}`
 
   _renderItem = ({ item }) => <TrackItem {...item} />
 
+  componentDidMount() {
+    this.props.requestPodcasts()
+  }
+
   render() {
+    const { podcasts, isFetching } = this.props
     return (
       <React.Fragment>
-        <FlatList
-          data={tracks}
-          renderItem={this._renderItem}
-          keyExtractor={this._keyExtractor}
-        />
+        {podcasts.length && !isFetching ? (
+          <FlatList
+            data={podcasts}
+            renderItem={this._renderItem}
+            keyExtractor={this._keyExtractor}
+          />
+        ) : (
+          <Preloader renderContainer />
+        )}
 
         <Player />
       </React.Fragment>

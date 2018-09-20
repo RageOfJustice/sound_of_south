@@ -9,9 +9,8 @@ const Container = styled.View`
   align-items: center;
   padding: 20px 30px;
   background-color: #fff;
-  border-bottom-color: ${({ theme, selected }) =>
-    selected ? theme.color.purple : theme.color.grey};
-  border-bottom-width: ${({ selected }) => (selected ? 3 : 1)}px;
+  border-bottom-color: ${({ theme }) => theme.color.grey};
+  border-bottom-width: 1px;
 `
 
 const LeftBlock = styled.View`
@@ -34,7 +33,7 @@ const Tags = styled.View`
 `
 
 const Tag = styled(Badge).attrs({
-  wrapperStyle: { paddingHorizontal: 5 },
+  wrapperStyle: { padding: 5 },
   containerStyle: ({ theme }) => ({
     backgroundColor: theme.color.coolGray,
   }),
@@ -48,13 +47,18 @@ const PlayIcon = styled(Icon).attrs({
   color: ({ theme }) => theme.color.orange,
 })``
 
+const TagDivider = styled(Divider)`
+  margin-vertical: 5px;
+  height: 2px;
+  background-color: ${({ theme }) => theme.color.grey};
+`
+
 type Props = {
   title: string,
   trackId: string,
   playingTrackId: ?string,
   tags?: string[],
   isPaused: boolean,
-  theme: any,
   playTrack: Function,
   pauseTrack: Function,
 }
@@ -69,16 +73,14 @@ class TrackItem extends React.Component<Props> {
   }
 
   render() {
-    const { tags, theme, title, trackId, isPaused, playingTrackId } = this.props
+    const { tags, title, trackId, isPaused, playingTrackId } = this.props
     return (
-      <Container selected={playingTrackId === trackId}>
+      <Container>
         <LeftBlock>
           <Title>{title}</Title>
           {!!tags && (
             <React.Fragment>
-              <Divider
-                style={{ marginVertical: 5, backgroundColor: theme.color.grey }}
-              />
+              <TagDivider />
               <Tags>
                 {tags.map((tag, index) => (
                   <Tag value={tag} key={index} />
