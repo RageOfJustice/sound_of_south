@@ -26,7 +26,7 @@ export const getPodcasts = () =>
         podcastId: '2',
         title: '2 minutes',
         url:
-          'https://s55myt.storage.yandex.net/get-mp3/01e98ae33d426d2f350422296b9e9d71/0005764e0aee959b/music/25/7/data-0.2:21788133749:8684981?track-id=303979&play=false',
+          'https://s55myt.storage.yandex.net/get-mp3/01e98ae33d426d2f350422296b9e9d71/0005764e0aee959b/music/25/7/data-0.2:21788133749:8684981?track-id=303979',
         tags: ['#bestbands', '#iron'],
       },
     ]),

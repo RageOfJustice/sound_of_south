@@ -55,7 +55,7 @@ const TagDivider = styled(Divider)`
 
 type Props = {
   title: string,
-  trackId: string,
+  podcastId: string,
   playingTrackId: ?string,
   tags?: string[],
   isPaused: boolean,
@@ -64,16 +64,16 @@ type Props = {
 }
 class TrackItem extends React.Component<Props> {
   _togglePlay = () => {
-    const { isPaused, trackId, playTrack, pauseTrack } = this.props
+    const { isPaused, podcastId, playTrack, pauseTrack } = this.props
     if (isPaused) {
-      playTrack(trackId)
+      playTrack(podcastId)
     } else {
       pauseTrack()
     }
   }
 
   render() {
-    const { tags, title, trackId, isPaused, playingTrackId } = this.props
+    const { tags, title, podcastId, isPaused, playingTrackId } = this.props
     return (
       <Container>
         <LeftBlock>
@@ -94,7 +94,9 @@ class TrackItem extends React.Component<Props> {
             name={
               isPaused
                 ? 'play-circle'
-                : playingTrackId === trackId && 'pause-circle'
+                : playingTrackId === podcastId
+                  ? 'pause-circle'
+                  : 'play-circle'
             }
             onPress={this._togglePlay}
           />

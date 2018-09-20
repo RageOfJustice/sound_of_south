@@ -28,6 +28,6 @@ export const getPlaylist = R.pipe(
 )
 
 export const getCurrentTrack = R.converge(
-  (playlist, trackId) => R.find(R.propEq('podcastId', trackId), playlist),
-  [R.getPlaylist, R.getCurrentTrackId],
+  (playlist, trackId) => R.find(R.propEq('podcastId', trackId), playlist) || {},
+  [getPlaylist, getCurrentTrackId],
 )
