@@ -2,7 +2,7 @@ import R from 'ramda'
 import { connect } from 'react-redux'
 import { Player } from '../components'
 import { getIsFetchingTrack, getIsPaused, getCurrentTrack } from '../selectors'
-import { setFetchingTrack } from '../actions'
+import { setFetchingTrack, changeTrack } from '../actions'
 
 const mapStateToProps = R.applySpec({
   isPaused: getIsPaused,
@@ -10,7 +10,7 @@ const mapStateToProps = R.applySpec({
   isFetching: getIsFetchingTrack,
 })
 
-const mapDispatchToProps = { setFetchingTrack }
+const mapDispatchToProps = { changeTrack, setFetchingTrack }
 
 export default connect(
   mapStateToProps,

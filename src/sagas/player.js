@@ -2,14 +2,16 @@
 import R from 'ramda'
 import { call, takeLatest, put, all, select } from 'redux-saga/effects'
 import {
+  CHANGE_TRACK,
   REQUEST_PODCASTS,
   REQUEST_PLAY_TRACK,
   REQUEST_PAUSE_TRACK,
   playTrack,
   pauseTrack,
   receivePodcasts,
+  requestPlayTrack,
 } from '../actions'
-import { getPlaylist } from '../selectors'
+import { getPlaylist, getNextTrack, getPreviousTrack } from '../selectors'
 import { getPodcasts } from '../managers'
 
 const playTrackWorker = function*({ payload: trackId }) {
@@ -48,10 +50,21 @@ const requestPodcastsWatcher = function*() {
   yield takeLatest(REQUEST_PODCASTS, requestPodcastsWorker)
 }
 
+const changeTrackWorker = function*({ payload: nextTrack }) {
+  const selector = nextTrack ? getNextTrack : getPreviousTrack
+  const { podcastId } = yield select(selector)
+  yield put(requestPlayTrack(podcastId))
+}
+
+const changeTrackWatcher = function*() {
+  yield takeLatest(CHANGE_TRACK, changeTrackWorker)
+}
+
 export default function*() {
   yield all([
     call(playTrackWatcher),
     call(pauseTrackWatcher),
+    call(changeTrackWatcher),
     call(requestPodcastsWatcher),
   ])
 }

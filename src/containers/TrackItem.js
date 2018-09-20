@@ -1,11 +1,16 @@
 import R from 'ramda'
 import { connect } from 'react-redux'
 import { TrackItem } from '../components'
-import { getIsPaused, getCurrentTrackId } from '../selectors'
+import {
+  getIsPaused,
+  getCurrentTrackId,
+  getIsFetchingTrack,
+} from '../selectors'
 import { requestPlayTrack, requestPauseTrack } from '../actions'
 
 const mapStateToProps = R.applySpec({
   isPaused: getIsPaused,
+  isFetching: getIsFetchingTrack,
   playingTrackId: getCurrentTrackId,
 })
 

@@ -31,3 +31,18 @@ export const getCurrentTrack = R.converge(
   (playlist, trackId) => R.find(R.propEq('podcastId', trackId), playlist) || {},
   [getPlaylist, getCurrentTrackId],
 )
+
+export const getCurrentTrackIndex = R.converge(
+  (playlist, trackId) => R.findIndex(R.propEq('podcastId', trackId), playlist),
+  [getPlaylist, getCurrentTrackId],
+)
+
+export const getNextTrack = R.converge(
+  (playlist, index) => (index + 1 < playlist.length ? playlist[index + 1] : {}),
+  [getPlaylist, getCurrentTrackIndex],
+)
+
+export const getPreviousTrack = R.converge(
+  (playlist, index) => (index - 1 >= 0 ? playlist[index - 1] : {}),
+  [getPlaylist, getCurrentTrackIndex],
+)

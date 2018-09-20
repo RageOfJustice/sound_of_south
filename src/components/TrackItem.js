@@ -2,6 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import SpinView from './SpinView'
 import { Divider, Text, Badge } from 'react-native-elements'
 
 const Container = styled.View`
@@ -55,25 +56,32 @@ const TagDivider = styled(Divider)`
 
 type Props = {
   title: string,
-  podcastId: string,
-  playingTrackId: ?string,
   tags?: string[],
+  podcastId: string,
   isPaused: boolean,
+  isFetching: boolean,
   playTrack: Function,
   pauseTrack: Function,
+  playingTrackId: ?string,
 }
+
 class TrackItem extends React.Component<Props> {
-  _togglePlay = () => {
-    const { isPaused, podcastId, playTrack, pauseTrack } = this.props
-    if (isPaused) {
-      playTrack(podcastId)
-    } else {
-      pauseTrack()
-    }
+  _playTrack = () => {
+    const { podcastId, playTrack } = this.props
+    playTrack(podcastId)
   }
 
+  _pauseTrack = () => this.props.pauseTrack()
+
   render() {
-    const { tags, title, podcastId, isPaused, playingTrackId } = this.props
+    const {
+      tags,
+      title,
+      isPaused,
+      podcastId,
+      isFetching,
+      playingTrackId,
+    } = this.props
     return (
       <Container>
         <LeftBlock>
@@ -90,16 +98,19 @@ class TrackItem extends React.Component<Props> {
           )}
         </LeftBlock>
         <RightBlock>
-          <PlayIcon
-            name={
-              isPaused
-                ? 'play-circle'
-                : playingTrackId === podcastId
-                  ? 'pause-circle'
-                  : 'play-circle'
-            }
-            onPress={this._togglePlay}
-          />
+          {isPaused ? (
+            <PlayIcon name="play-circle" onPress={this._playTrack} />
+          ) : playingTrackId === podcastId ? (
+            isFetching ? (
+              <SpinView>
+                <PlayIcon size={45} name="spinner" onPress={this._pauseTrack} />
+              </SpinView>
+            ) : (
+              <PlayIcon name="pause-circle" onPress={this._pauseTrack} />
+            )
+          ) : (
+            <PlayIcon name="play-circle" onPress={this._playTrack} />
+          )}
         </RightBlock>
       </Container>
     )
