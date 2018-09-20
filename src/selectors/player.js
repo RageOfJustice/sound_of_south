@@ -12,6 +12,11 @@ export const getIsFetchingTrack = R.pipe(
   R.prop('isFetchingTrack'),
 )
 
+export const getIsFetchingPlaylist = R.pipe(
+  getPlayerState,
+  R.prop('isFetchingPlaylist'),
+)
+
 export const getCurrentTrackId = R.pipe(
   getPlayerState,
   R.prop('currentTrackId'),
@@ -20,4 +25,9 @@ export const getCurrentTrackId = R.pipe(
 export const getPlaylist = R.pipe(
   getPlayerState,
   R.prop('playlist'),
+)
+
+export const getCurrentTrack = R.converge(
+  (playlist, trackId) => R.find(R.propEq('podcastId', trackId), playlist),
+  [R.getPlaylist, R.getCurrentTrackId],
 )

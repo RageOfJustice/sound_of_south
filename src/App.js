@@ -7,6 +7,8 @@ import configureStore from './configureStore'
 
 const store = configureStore()
 
+// store.subscribe(() => console.log(store.getState()))
+
 const App = () => (
   <Provider store={store}>
     <ThemeProvider theme={theme}>

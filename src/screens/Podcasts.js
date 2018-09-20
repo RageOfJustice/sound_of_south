@@ -26,14 +26,16 @@ class Podcasts extends React.Component<Props> {
     const { podcasts, isFetching } = this.props
     return (
       <React.Fragment>
-        {podcasts.length && !isFetching ? (
-          <FlatList
-            data={podcasts}
-            renderItem={this._renderItem}
-            keyExtractor={this._keyExtractor}
-          />
-        ) : (
+        {!podcasts.length && isFetching ? (
           <Preloader renderContainer />
+        ) : (
+          !!podcasts.length && (
+            <FlatList
+              data={podcasts}
+              renderItem={this._renderItem}
+              keyExtractor={this._keyExtractor}
+            />
+          )
         )}
 
         <Player />

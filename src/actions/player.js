@@ -27,3 +27,9 @@ export const setFetchingTrack = createAction(SET_FETCHING_TRACK)
 
 export const SET_PLAYLIST = getActionName('SET_PLAYLIST')
 export const setPlaylist = createAction(SET_PLAYLIST)
+
+export const REQUEST_PODCASTS = getActionName('REQUEST_PODCASTS')
+export const requestPodcasts = createAction(REQUEST_PODCASTS)
+
+export const RECEIVE_PODCASTS = getActionName('RECEIVE_PODCASTS')
+export const receivePodcasts = createAction(RECEIVE_PODCASTS)

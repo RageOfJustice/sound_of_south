@@ -1,3 +1,3 @@
 export * from './auth'
-export * from './podcast'
+export * from './player'
 export * from './navigation'
