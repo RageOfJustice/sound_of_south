@@ -53,30 +53,23 @@ type Props = {
   trackId: string,
   playingTrackId: ?string,
   tags?: string[],
-  isPlaying: boolean,
+  isPaused: boolean,
   theme: any,
   playTrack: Function,
   pauseTrack: Function,
 }
 class TrackItem extends React.Component<Props> {
   _togglePlay = () => {
-    const { isPlaying, trackId, playTrack, pauseTrack } = this.props
-    if (isPlaying) {
-      pauseTrack()
-    } else {
+    const { isPaused, trackId, playTrack, pauseTrack } = this.props
+    if (isPaused) {
       playTrack(trackId)
+    } else {
+      pauseTrack()
     }
   }
 
   render() {
-    const {
-      tags,
-      theme,
-      title,
-      trackId,
-      isPlaying,
-      playingTrackId,
-    } = this.props
+    const { tags, theme, title, trackId, isPaused, playingTrackId } = this.props
     return (
       <Container selected={playingTrackId === trackId}>
         <LeftBlock>
@@ -97,9 +90,9 @@ class TrackItem extends React.Component<Props> {
         <RightBlock>
           <PlayIcon
             name={
-              isPlaying
-                ? playingTrackId === trackId && 'pause-circle'
-                : 'play-circle'
+              isPaused
+                ? 'play-circle'
+                : playingTrackId === trackId && 'pause-circle'
             }
             onPress={this._togglePlay}
           />
