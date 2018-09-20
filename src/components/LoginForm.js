@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+import R from 'ramda'
 import { Platform } from 'react-native'
 import { Field } from 'redux-form'
 import type { FormProps } from 'redux-form'
@@ -37,6 +38,10 @@ const FormInput = styled(Input).attrs({
   inputStyle: ({ theme }) => ({
     color: theme.color.black100,
   }),
+  labelStyle: ({ theme }) => ({
+    color: theme.color.orange,
+    fontSize: theme.size.m,
+  }),
   containerStyle: {
     backgroundColor: 'transparent',
     marginBottom: 20,
@@ -45,6 +50,7 @@ const FormInput = styled(Input).attrs({
   inputContainerStyle: ({ theme }) => ({
     borderBottomColor: theme.color.orange,
   }),
+  errorStyle: ({ theme }) => ({ color: theme.color.red }),
 })``
 
 const LogoText = styled(Text)`
@@ -54,15 +60,9 @@ const LogoText = styled(Text)`
   margin-bottom: 20px;
 `
 
-const FormLabel = styled(Text)`
-  font-size: ${({ theme }) => theme.size.m};
-  color: ${({ theme }) => theme.color.orange};
-`
-
 type Props = {
   theme: object,
   logoText: string,
-  isFetching: boolean,
   requestAuth: Function,
 } & FormProps
 
@@ -73,7 +73,7 @@ class LoginForm extends React.PureComponent<Props> {
       logoText,
       handleSubmit,
       requestAuth,
-      isFetching,
+      submitting,
     } = this.props
     return (
       <Container>
@@ -85,39 +85,47 @@ class LoginForm extends React.PureComponent<Props> {
           component={this._renderPasswordInput}
         />
         <SubmitButton
-          loading={isFetching}
+          loading={submitting}
           onPress={handleSubmit(requestAuth)}
         />
       </Container>
     )
   }
 
-  _renderLoginInput = ({ input: { value, onChange }, meta: { error } }) => (
-    <React.Fragment>
-      <FormLabel>Имя Пользователя</FormLabel>
-      <FormInput
-        onChangeText={onChange}
-        textContentType="username"
-        placeholder="ivan.ivanov"
-        value={value}
-        errorMessage={error}
-      />
-    </React.Fragment>
+  _renderLoginInput = ({
+    input: { value, onChange, onBlur },
+    meta: { error, touched },
+  }) => (
+    <FormInput
+      label="Имя Пользователя"
+      onChangeText={onChange}
+      onBlur={onBlur}
+      textContentType="username"
+      placeholder="ivan.ivanov"
+      value={value}
+      normalize={R.trim}
+      errorMessage={touched && error}
+      onSubmitEditing={this.password && this.password.focus}
+    />
   )
 
-  _renderPasswordInput = ({ input: { value, onChange }, meta: { error } }) => (
-    <React.Fragment>
-      <FormLabel>Пароль</FormLabel>
-      <FormInput
-        onChangeText={onChange}
-        secureTextEntry
-        selectTextOnFocus
-        textContentType="password"
-        placeholder="коррп. пароль"
-        value={value}
-        errorMessage={error}
-      />
-    </React.Fragment>
+  _renderPasswordInput = ({
+    input: { value, onChange, onBlur },
+    meta: { error, touched },
+  }) => (
+    <FormInput
+      label="Пароль"
+      onChangeText={onChange}
+      onBlur={onBlur}
+      secureTextEntry
+      selectTextOnFocus
+      textContentType="password"
+      placeholder="коррп. пароль"
+      value={value}
+      withRef={ref => (this.password = ref)}
+      onSubmitEditing={this.props.handleSubmit(this.props.requestAuth)}
+      errorMessage={touched && error}
+    />
   )
 }
 

@@ -4,11 +4,8 @@ import { connect } from 'react-redux'
 import { LoginForm } from '../components'
 import { withTheme } from 'styled-components'
 import { requestAuth } from '../actions'
-import { getIsAuthFetching } from '../selectors'
-
-const mapStateToProps = R.applySpec({
-  isFetching: getIsAuthFetching,
-})
+import { FORMS } from '../constants'
+import { validateLoginForm } from '../utils'
 
 const mapDispatchToProps = {
   requestAuth,
@@ -16,11 +13,12 @@ const mapDispatchToProps = {
 
 export default R.compose(
   reduxForm({
-    form: 'auth',
+    form: FORMS.AUTH,
+    validate: validateLoginForm,
   }),
   withTheme,
   connect(
-    mapStateToProps,
+    undefined,
     mapDispatchToProps,
   ),
 )(LoginForm)
