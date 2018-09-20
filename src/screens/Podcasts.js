@@ -6,11 +6,19 @@ import {
   TrackItemContainer as TrackItem,
 } from '../containers'
 import { Preloader } from '../components'
+import styled from 'styled-components'
+
+const RefreshControl = styled.RefreshControl.attrs({
+  colors: ({ theme }) => [theme.color.orange],
+  tintColor: ({ theme }) => theme.color.orange,
+})``
 
 type Props = {
   podcasts: object[],
   isFetching: boolean,
-  requestPodcasts: Function,
+  isRefreshing: boolean,
+  requestPodcasts: () => void,
+  refreshPodcasts: () => void,
 }
 
 class Podcasts extends React.Component<Props> {
@@ -23,7 +31,7 @@ class Podcasts extends React.Component<Props> {
   }
 
   render() {
-    const { podcasts, isFetching } = this.props
+    const { podcasts, isFetching, isRefreshing, refreshPodcasts } = this.props
     return (
       <React.Fragment>
         {!podcasts.length && isFetching ? (
@@ -32,6 +40,12 @@ class Podcasts extends React.Component<Props> {
           !!podcasts.length && (
             <FlatList
               data={podcasts}
+              refreshControl={
+                <RefreshControl
+                  refreshing={isRefreshing}
+                  onRefresh={refreshPodcasts}
+                />
+              }
               renderItem={this._renderItem}
               keyExtractor={this._keyExtractor}
             />

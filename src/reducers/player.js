@@ -8,12 +8,21 @@ import {
   RECEIVE_PODCASTS,
   REQUEST_PODCASTS,
   SET_FETCHING_TRACK,
+  REFRESH_PODCASTS,
 } from '../actions'
 
 const isPaused = handleActions(
   {
     [PAUSE_TRACK]: R.T,
     [PLAY_TRACK]: R.F,
+  },
+  true,
+)
+
+const isRefreshingPlaylist = handleActions(
+  {
+    [REFRESH_PODCASTS]: R.T,
+    [RECEIVE_PODCASTS]: R.F,
   },
   true,
 )
@@ -48,4 +57,5 @@ export default combineReducers({
   currentTrackId,
   isFetchingTrack,
   isFetchingPlaylist,
+  isRefreshingPlaylist,
 })

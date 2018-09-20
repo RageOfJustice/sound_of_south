@@ -11,6 +11,7 @@ import {
   receivePodcasts,
   requestPlayTrack,
   requestPauseTrack,
+  REFRESH_PODCASTS,
 } from '../actions'
 import { getPlaylist, getNextTrack, getPreviousTrack } from '../selectors'
 import { getPodcasts } from '../managers'
@@ -48,7 +49,7 @@ const requestPodcastsWorker = function*() {
 }
 
 const requestPodcastsWatcher = function*() {
-  yield takeLatest(REQUEST_PODCASTS, requestPodcastsWorker)
+  yield takeLatest([REQUEST_PODCASTS, REFRESH_PODCASTS], requestPodcastsWorker)
 }
 
 const changeTrackWorker = function*({ payload: nextTrack }) {

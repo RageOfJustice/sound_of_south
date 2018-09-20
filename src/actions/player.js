@@ -33,3 +33,6 @@ export const requestPodcasts = createAction(REQUEST_PODCASTS)
 
 export const RECEIVE_PODCASTS = getActionName('RECEIVE_PODCASTS')
 export const receivePodcasts = createAction(RECEIVE_PODCASTS)
+
+export const REFRESH_PODCASTS = getActionName('REFRESH_PODCASTS')
+export const refreshPodcasts = createAction(REFRESH_PODCASTS)

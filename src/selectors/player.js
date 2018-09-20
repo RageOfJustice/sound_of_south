@@ -17,6 +17,11 @@ export const getIsFetchingPlaylist = R.pipe(
   R.prop('isFetchingPlaylist'),
 )
 
+export const getIsRefreshingPlaylist = R.pipe(
+  getPlayerState,
+  R.prop('isRefreshingPlaylist'),
+)
+
 export const getCurrentTrackId = R.pipe(
   getPlayerState,
   R.prop('currentTrackId'),

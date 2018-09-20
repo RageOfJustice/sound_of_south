@@ -1,17 +1,23 @@
 import R from 'ramda'
 import { connect } from 'react-redux'
 import { PodcastsScreen } from '../screens'
-import { navigate, requestPodcasts } from '../actions'
-import { getPlaylist, getIsFetchingPlaylist } from '../selectors'
+import { navigate, requestPodcasts, refreshPodcasts } from '../actions'
+import {
+  getPlaylist,
+  getIsFetchingPlaylist,
+  getIsRefreshingPlaylist,
+} from '../selectors'
 
 const mapStateToProps = R.applySpec({
   podcasts: getPlaylist,
   isFetching: getIsFetchingPlaylist,
+  isRefreshing: getIsRefreshingPlaylist,
 })
 
 const mapDispatchToProps = {
   navigate,
   requestPodcasts,
+  refreshPodcasts,
 }
 
 export default connect(
