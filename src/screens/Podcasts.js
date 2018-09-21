@@ -26,10 +26,6 @@ class Podcasts extends React.Component<Props> {
 
   _renderItem = ({ item }) => <TrackItem {...item} />
 
-  componentDidMount() {
-    this.props.requestPodcasts()
-  }
-
   render() {
     const { podcasts, isFetching, isRefreshing, refreshPodcasts } = this.props
     return (

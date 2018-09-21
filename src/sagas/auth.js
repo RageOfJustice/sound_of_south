@@ -7,6 +7,7 @@ import {
   REQUEST_AUTH,
   login,
   setToken,
+  requestPodcasts,
   requestPauseTrack,
 } from '../actions'
 import {
@@ -35,6 +36,7 @@ const loginWorker = function*(token: string, username?: string) {
   }
   yield all([call(saveToken, token), put(setToken(token))])
   yield put(login(username))
+  yield put(requestPodcasts())
 }
 
 const requestAuthWorker = function*({ payload: { username, password } }) {

@@ -13,7 +13,12 @@ import {
   requestPauseTrack,
   REFRESH_PODCASTS,
 } from '../actions'
-import { getPlaylist, getNextTrack, getPreviousTrack } from '../selectors'
+import {
+  getToken,
+  getPlaylist,
+  getNextTrack,
+  getPreviousTrack,
+} from '../selectors'
 import { getPodcasts } from '../managers'
 
 const playTrackWorker = function*({ payload: trackId }) {
@@ -39,11 +44,13 @@ const pauseTrackWatcher = function*() {
 const requestPodcastsWorker = function*() {
   let podcasts = {}
   try {
-    podcasts = yield call(getPodcasts)
+    const token = yield select(getToken)
+    podcasts = yield call(getPodcasts, token)
+    console.log(podcasts)
     podcasts = R.sortBy(R.prop('title'), podcasts)
   } catch (error) {
     // TODO: handle
-    // console.log(error)
+    console.log(error)
   }
   yield put(receivePodcasts(podcasts))
 }
