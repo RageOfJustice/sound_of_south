@@ -1,12 +1,6 @@
 // @flow
 import { call, takeLatest, put, all } from 'redux-saga/effects'
-import {
-  LOGOUT,
-  REQUEST_AUTH,
-  login,
-  logout,
-  requestPauseTrack,
-} from '../actions'
+import { LOGOUT, REQUEST_AUTH, login, requestPauseTrack } from '../actions'
 import {
   stopSubmit,
   startSubmit,

@@ -1,12 +1,19 @@
 // @flow
 import React from 'react'
-// import styled from 'styled-components'
+import { MessageFormContainer as MessageForm } from '../containers'
+import styled from 'styled-components'
+
+const Container = styled.ScrollView``
 
 type Props = {}
 
 class Message extends React.Component<Props> {
   render() {
-    return null
+    return (
+      <Container>
+        <MessageForm titleText="Если у вас есть идеи, вопросы, предложения напишите нам" />
+      </Container>
+    )
   }
 }
 

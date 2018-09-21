@@ -49,7 +49,8 @@ const Main = createStackNavigator(
     },
   },
   {
-    initialRouteName: 'Podcasts',
+    // initialRouteName: 'Podcasts',
+    initialRouteName: 'Message',
   },
 )
 
