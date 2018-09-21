@@ -5,4 +5,5 @@ import { delay } from 'redux-saga'
 //     // implemetation
 // }
 
-export const authorize = (login, password) => delay(1000).then(() => true)
+export const authorize = (login, password) =>
+  delay(1000).then(() => 'tokensadfg')
