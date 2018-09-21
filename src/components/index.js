@@ -1,4 +1,5 @@
 export { default as Player } from './Player'
+export { default as Header } from './Header'
 export { default as SpinView } from './SpinView'
 export { default as LoginForm } from './LoginForm'
 export { default as TrackItem } from './TrackItem'
