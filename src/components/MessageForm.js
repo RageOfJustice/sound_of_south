@@ -18,18 +18,16 @@ const SubmitButton = styled(Button).attrs({
   title: 'Отправить',
   activeOpacity: 0.6,
   hitSlop: HIT_SLOP_10,
-  buttonStyle: {
-    backgroundColor: '#fff',
+  buttonStyle: ({ theme }) => ({
+    backgroundColor: theme.color.orange,
     borderWidth: 0,
     borderRadius: 25,
-  },
+  }),
   loadingProps: ({ theme }) => ({ size: 'small', color: theme.color.orange }),
   loadingStyle: {
     padding: 10,
   },
-  titleStyle: ({ theme }) => ({
-    color: theme.color.orange,
-  }),
+  titleStyle: { color: '#fff' },
 })``
 
 const FormInput = styled(Input).attrs({
@@ -108,7 +106,7 @@ class MessageForm extends React.PureComponent<Props> {
       onChangeText={onChange}
       placeholder="Тема сообщения"
       errorMessage={touched && error}
-      onSubmitEditing={this.message && this.message.focus}
+      onSubmitEditing={() => this.message.focus()}
     />
   )
 

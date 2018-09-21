@@ -109,7 +109,7 @@ class LoginForm extends React.PureComponent<Props> {
       value={value}
       normalize={R.trim}
       errorMessage={touched && error}
-      onSubmitEditing={this.password && this.password.focus}
+      onSubmitEditing={() => this.password.focus()}
     />
   )
 
@@ -126,7 +126,7 @@ class LoginForm extends React.PureComponent<Props> {
       textContentType="password"
       placeholder="коррп. пароль"
       value={value}
-      withRef={ref => (this.password = ref)}
+      innerRef={ref => (this.password = ref)}
       onSubmitEditing={this.props.handleSubmit(this.props.requestAuth)}
       errorMessage={touched && error}
     />
