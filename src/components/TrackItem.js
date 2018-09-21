@@ -1,7 +1,8 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import EvilIcon from 'react-native-vector-icons/EvilIcons'
+import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons'
 import SpinView from './SpinView'
 import { Divider, Text, Badge } from 'react-native-elements'
 
@@ -41,10 +42,28 @@ const Tag = styled(Badge).attrs({
   textStyle: ({ theme }) => ({ color: theme.color.black100 }),
 })``
 
-const PlayIcon = styled(Icon).attrs({
-  size: 50,
+const PlayIcon = styled(SimpleLineIcon).attrs({
+  size: 35,
   raise: true,
   reverse: true,
+  containerStyle: {
+    width: 50,
+    alignItems: 'center',
+  },
+  color: ({ theme }) => theme.color.orange,
+})``
+
+const SpinnerIcon = styled(EvilIcon).attrs({
+  size: 35,
+  raise: true,
+  reverse: true,
+  containerStyle: {
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  name: 'spinner-2',
   color: ({ theme }) => theme.color.orange,
 })``
 
@@ -99,17 +118,17 @@ class TrackItem extends React.Component<Props> {
         </LeftBlock>
         <RightBlock>
           {isPaused ? (
-            <PlayIcon name="play-circle" onPress={this._playTrack} />
+            <PlayIcon name="control-play" onPress={this._playTrack} />
           ) : playingTrackId === podcastId ? (
             isFetching ? (
               <SpinView>
-                <PlayIcon size={45} name="spinner" onPress={this._pauseTrack} />
+                <SpinnerIcon onPress={this._pauseTrack} />
               </SpinView>
             ) : (
-              <PlayIcon name="pause-circle" onPress={this._pauseTrack} />
+              <PlayIcon name="control-pause" onPress={this._pauseTrack} />
             )
           ) : (
-            <PlayIcon name="play-circle" onPress={this._playTrack} />
+            <PlayIcon name="control-play" onPress={this._playTrack} />
           )}
         </RightBlock>
       </Container>

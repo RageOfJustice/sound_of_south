@@ -1,6 +1,5 @@
 export { default as LoginContainer } from './Login'
 export { default as PlayerContainer } from './Player'
-export { default as HeaderContainer } from './Header'
 export { default as MessageContainer } from './Message'
 export { default as PodcastsContainer } from './Podcasts'
 export { default as LoginFormContainer } from './LoginForm'
