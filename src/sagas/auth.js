@@ -1,6 +1,6 @@
 // @flow
 import { call, takeLatest, put, all } from 'redux-saga/effects'
-import { LOGOUT, REQUEST_AUTH, login, logout } from '../actions'
+import { LOGOUT, REQUEST_AUTH, login, requestPauseTrack } from '../actions'
 import {
   stopSubmit,
   startSubmit,
@@ -34,7 +34,8 @@ const requestAuthWatcher = function*() {
 }
 
 const logoutWorker = function*() {
-  yield put(logout())
+  yield put(requestPauseTrack())
+  yield call(navigate, 'Login')
 }
 
 const logoutWatcher = function*() {

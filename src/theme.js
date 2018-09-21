@@ -23,7 +23,8 @@ export default {
     xs: 12,
     s: 14,
     m: 16,
-    l: 20,
+    l: 18,
+    xl: 20,
   },
   weight: {
     medium: '500',
