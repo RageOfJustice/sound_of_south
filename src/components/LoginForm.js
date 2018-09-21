@@ -78,7 +78,11 @@ class LoginForm extends React.PureComponent<Props> {
     return (
       <Container>
         <LogoText>{logoText}</LogoText>
-        <Field name="login" theme={theme} component={this._renderLoginInput} />
+        <Field
+          name="username"
+          theme={theme}
+          component={this._renderLoginInput}
+        />
         <Field
           name="password"
           theme={theme}

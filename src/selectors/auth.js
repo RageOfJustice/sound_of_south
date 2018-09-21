@@ -6,3 +6,8 @@ export const getIsAuthorized = R.pipe(
   getAuthState,
   R.prop('isAuthorized'),
 )
+
+export const getToken = R.pipe(
+  getAuthState,
+  R.prop('token'),
+)

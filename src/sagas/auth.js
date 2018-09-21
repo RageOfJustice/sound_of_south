@@ -1,4 +1,5 @@
 // @flow
+import R from 'ramda'
 import { call, takeLatest, put, all } from 'redux-saga/effects'
 import {
   LOGOUT,
@@ -6,6 +7,7 @@ import {
   REQUEST_AUTH,
   login,
   setToken,
+  requestPodcasts,
   requestPauseTrack,
 } from '../actions'
 import {
@@ -34,22 +36,31 @@ const loginWorker = function*(token: string, username?: string) {
   }
   yield all([call(saveToken, token), put(setToken(token))])
   yield put(login(username))
+  yield put(requestPodcasts())
 }
 
-const requestAuthWorker = function*({
-  payload: { login: userName, password },
-}) {
+const requestAuthWorker = function*({ payload: { username, password } }) {
   try {
     yield put(startSubmit(FORMS.AUTH))
-    const token = yield call(authorize, userName, password)
-    if (token) {
-      yield call(loginWorker, token, userName)
+    const data = yield call(authorize, username, password)
+    if (!data.error) {
+      yield call(loginWorker, data.accessToken, username)
       yield put(setSubmitSucceeded(FORMS.AUTH))
       yield put(stopSubmit(FORMS.AUTH))
+    } else {
+      yield put(setSubmitFailed(FORMS.AUTH))
+      yield put(
+        stopSubmit(FORMS.AUTH, { ...R.pick(['username', 'password'], data) }),
+      )
     }
   } catch (error) {
     yield put(setSubmitFailed(FORMS.AUTH))
-    yield put(stopSubmit(FORMS.AUTH))
+    yield put(
+      stopSubmit(FORMS.AUTH, {
+        username: 'Неизвестная ошибка',
+        password: 'Неизвестная ошибка',
+      }),
+    )
   }
 }
 
