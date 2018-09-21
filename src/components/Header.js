@@ -18,7 +18,7 @@ class Header extends React.PureComponent<Props> {
         backgroundColor={theme.color.purple}
         centerComponent={{
           text: title,
-          style: { color: '#fff', fontSize: 18, fontWeight: '700' },
+          style: { color: '#fff', fontSize: theme.size.l, fontWeight: '700' },
         }}
         leftComponent={leftComponent}
         rightComponent={rightComponent}
