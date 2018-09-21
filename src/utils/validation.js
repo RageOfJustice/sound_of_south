@@ -15,8 +15,8 @@ export const validateMessageForm = values => {
   if (!values.topic) {
     errors.topic = 'Это поле обязательно'
   }
-  if (!values.area) {
-    errors.area = 'Это поле обязательно'
+  if (!values.message) {
+    errors.message = 'Это поле обязательно'
   }
 
   return errors

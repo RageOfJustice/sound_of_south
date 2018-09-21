@@ -88,7 +88,7 @@ class MessageForm extends React.PureComponent<Props> {
       <Container>
         <TitleText>{titleText}</TitleText>
         <Field name="topic" theme={theme} component={this._renderTopicInput} />
-        <Field name="area" theme={theme} component={this._renderAreaInput} />
+        <Field name="message" theme={theme} component={this._renderAreaInput} />
         <SubmitButton
           loading={submitting}
           onPress={handleSubmit(sendMessage)}
@@ -108,7 +108,7 @@ class MessageForm extends React.PureComponent<Props> {
       onChangeText={onChange}
       placeholder="Тема сообщения"
       errorMessage={touched && error}
-      onSubmitEditing={this.area && this.area.focus}
+      onSubmitEditing={this.message && this.message.focus}
     />
   )
 
@@ -119,13 +119,11 @@ class MessageForm extends React.PureComponent<Props> {
     <FormArea
       value={value}
       onBlur={onBlur}
-      maxLength={1000}
       normalize={R.trim}
       onChangeText={onChange}
       placeholder="Текст сообщения"
       errorMessage={touched && error}
-      withRef={ref => (this.area = ref)}
-      onSubmitEditing={this.props.handleSubmit(this.props.sendMessage)}
+      innerRef={ref => (this.message = ref)}
     />
   )
 }

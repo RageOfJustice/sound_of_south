@@ -12,6 +12,7 @@
       "onlyFilesWithFlowAnnotation": false
     }
   },
+  "globals": { "fetch": false },
   "rules": {
     "import/no-unresolved": "error",
     "import/named": "error",
