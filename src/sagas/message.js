@@ -15,6 +15,7 @@ const sendMessageWorker = function*({ payload: { topic, message } }) {
   try {
     yield put(startSubmit(FORMS.MESSAGE))
     const data = yield call(sendMessage, topic, message)
+    console.log(data)
     if (!data.error) {
       yield put(setSubmitSucceeded(FORMS.MESSAGE))
       yield put(stopSubmit(FORMS.MESSAGE))
@@ -25,6 +26,7 @@ const sendMessageWorker = function*({ payload: { topic, message } }) {
       )
     }
   } catch (error) {
+    console.log(error)
     yield put(setSubmitFailed(FORMS.MESSAGE))
     yield put(
       stopSubmit(FORMS.MESSAGE, {

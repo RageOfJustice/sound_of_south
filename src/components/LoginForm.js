@@ -22,6 +22,7 @@ const SubmitButton = styled(Button).attrs({
     backgroundColor: '#fff',
     borderWidth: 0,
     borderRadius: 25,
+    paddingVertical: 10,
   },
   loadingProps: ({ theme }) => ({ size: 'small', color: theme.color.orange }),
   loadingStyle: {

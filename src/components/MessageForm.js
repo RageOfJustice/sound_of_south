@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import R from 'ramda'
-import { Platform } from 'react-native'
+import { Platform, Alert } from 'react-native'
 import { Field } from 'redux-form'
 import type { FormProps } from 'redux-form'
 import { Input, Button, Text } from 'react-native-elements'
@@ -21,9 +21,10 @@ const SubmitButton = styled(Button).attrs({
   buttonStyle: ({ theme }) => ({
     backgroundColor: theme.color.orange,
     borderWidth: 0,
-    borderRadius: 25,
+    borderRadius: 15,
+    paddingVertical: 10,
   }),
-  loadingProps: ({ theme }) => ({ size: 'small', color: theme.color.orange }),
+  loadingProps: { size: 'small', color: '#fff' },
   loadingStyle: {
     padding: 10,
   },
@@ -68,6 +69,7 @@ const TitleText = styled(Text).attrs({
 `
 
 type Props = {
+  nabigate: Function,
   theme: object,
   titleText: string,
   sendMessage: Function,
@@ -93,6 +95,24 @@ class MessageForm extends React.PureComponent<Props> {
         />
       </Container>
     )
+  }
+
+  componentDidUpdate({ submitSucceeded, submitFailed }) {
+    if (
+      submitSucceeded !== this.props.submitSucceeded &&
+      this.props.submitSucceeded
+    ) {
+      Alert.alert('Сообщение отправлено', undefined, [
+        { text: 'Принять', onPress: () => this.props.navigate('Podcasts') },
+      ])
+    } else if (
+      submitFailed !== this.props.submitFailed &&
+      this.props.submitFailed
+    ) {
+      Alert.alert('Ошибка', 'При отправлении сообщения произошла ошибка', [
+        { text: 'Принять' },
+      ])
+    }
   }
 
   _renderTopicInput = ({
