@@ -1,4 +1,4 @@
-package com.react_native_template;
+package com.voice_of_south;
 
 import android.app.Application;
 
