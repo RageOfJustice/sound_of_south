@@ -15,3 +15,9 @@ export const login = createAction(LOGIN)
 
 export const LOGOUT = getActionName('LOGOUT')
 export const logout = createAction(LOGOUT)
+
+export const CHECK_TOKEN = getActionName('CHECK_TOKEN')
+export const checkToken = createAction(CHECK_TOKEN)
+
+export const SET_TOKEN = getActionName('SET_TOKEN')
+export const setToken = createAction(SET_TOKEN)
