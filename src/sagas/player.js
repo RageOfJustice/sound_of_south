@@ -46,11 +46,10 @@ const requestPodcastsWorker = function*() {
   try {
     const token = yield select(getToken)
     podcasts = yield call(getPodcasts, token)
-    console.log(podcasts)
     podcasts = R.sortBy(R.prop('title'), podcasts)
   } catch (error) {
     // TODO: handle
-    console.log(error)
+    // console.log(error)
   }
   yield put(receivePodcasts(podcasts))
 }

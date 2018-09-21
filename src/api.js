@@ -1,4 +1,5 @@
 export const HOST = 'http://localhost:3000/'
+// export const HOST = 'http://83.239.44.197/'
 
 export const BASE_URL = `${HOST}api/`
 
