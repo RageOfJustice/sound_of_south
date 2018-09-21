@@ -2,10 +2,10 @@
 import { call, takeLatest, put, all } from 'redux-saga/effects'
 import { LOGOUT, REQUEST_AUTH, login, logout } from '../actions'
 import {
-  startSubmit,
-  setSubmitSucceeded,
-  setSubmitFailed,
   stopSubmit,
+  startSubmit,
+  setSubmitFailed,
+  setSubmitSucceeded,
 } from 'redux-form'
 import { authorize, navigate } from '../managers'
 import { FORMS } from '../constants'
@@ -18,9 +18,9 @@ const requestAuthWorker = function*({
     const isOk = yield call(authorize, userName.trim(), password)
     if (isOk) {
       yield call(navigate, 'Podcasts')
+      yield put(login())
       yield put(setSubmitSucceeded(FORMS.AUTH))
       yield put(stopSubmit(FORMS.AUTH))
-      yield put(login())
     }
   } catch (error) {
     // TODO: add handler
